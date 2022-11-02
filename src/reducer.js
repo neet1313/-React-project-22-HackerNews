@@ -14,6 +14,15 @@ const reducer = (state, action) => {
     case SET_STORIES:
       return { ...state, isLoading: false, hits: action.payload.hits, nbPages: action.payload.nbPages }
 
+    case REMOVE_STORY:
+      let filteredList = state.hits.filter(story => story.objectID !== action.payload);
+      return { ...state, hits: filteredList }
+
+    case HANDLE_SEARCH:
+      return { ...state, query: action.payload, page: 0 }
+
+    // case HANDLE_PAGE:
+
     default:
       return new Error(`invalid ${action.type} action type`)
   }
